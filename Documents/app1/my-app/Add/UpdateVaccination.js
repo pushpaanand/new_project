@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -7,25 +7,30 @@ import { useNavigation } from '@react-navigation/native';
 import * as DocumentPicker from 'expo-document-picker';
 import { BlurView } from 'expo-blur';
 
-export default function AddVaccination() {
-    const [vaccinationFor, setVaccinationFor] = useState('');
-    const [vaccineDetail, setVaccineDetail] = useState('');
-    const [takenOn, setTakenOn] = useState('');
-    const [lotNumber, setLotNumber] = useState('');
+export default function UpdateVaccination({ route }) {
+    const { item } = route.params; // Get the item passed from the table row click
+    const [vaccinationFor, setVaccinationFor] = useState(item.vaccinationFor || '');
+    const [vaccineDetail, setVaccineDetail] = useState(item.vaccineDetail || '');
+    const [takenOn, setTakenOn] = useState(item.takenOn || '');
+    const [lotNumber, setLotNumber] = useState(item.lotNumber || '');
     const [nextVaccinationDate, setNextVaccinationDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
-    const [notes, setNotes] = useState('');
-    const [fileName, setFileName] = useState('No file chosen');
-    const [isFocused, setIsFocused] = useState({
-        vaccinationfor: false,
-        takenOn: false,
-        lotNumber: false,
-        nextVaccinationDate: false,
-        notes: false,
-    });
+    const [notes, setNotes] = useState(item.notes || '');
+    const [fileName, setFileName] = useState(item.fileName || 'No file chosen');
+    const [isFocused, setIsFocused] = useState({});
     const [loading, setLoading] = useState(false); 
     const [showSuccessMessage, setShowSuccessMessage] = useState(false); 
     const navigation = useNavigation();
+
+    useEffect(() => {
+        setVaccinationFor(item.vaccinationFor);
+        setVaccineDetail(item.vaccineDetail);
+        setTakenOn(item.takenOn);
+        setLotNumber(item.lotNumber);
+        // setNextVaccinationDate(new Date());
+        setNotes(item.notes);
+        setFileName(item.fileName || 'No file chosen');
+    }, [item]);
 
     const renderInputField = (field, label, value, setValue) => (
         <View style={[styles.inputContainer, isFocused[field] && styles.focusedInput]}>
@@ -49,10 +54,6 @@ export default function AddVaccination() {
         setShowDatePicker(false);
     };
 
-    const handleBackPress = () => {
-        navigation.goBack();
-    };
-console.log('fff', fileName);
     const handleFileUpload = async () => {
         const result1 = await DocumentPicker.getDocumentAsync({});
         const result=result1.assets;
@@ -68,8 +69,7 @@ console.log('fff', fileName);
             setLoading(false); 
             setShowSuccessMessage(true);
             setTimeout(() => {                
-                // navigation.goBack();
-                navigation.navigate('vaccination', { message: 'Vaccination added successfully!' });
+                navigation.goBack();  // Or navigate to the vaccination list page if needed
                 setShowSuccessMessage(false);  
             }, 2000); 
         }, 2000); 
@@ -78,15 +78,14 @@ console.log('fff', fileName);
     return (
         <ScrollView contentContainerStyle={styles.scrollContent}>
             <View style={styles.container}>
-                {/* Vaccination For Dropdown */}
-                <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                     <Ionicons name="arrow-back" size={24} color="#692367" />
                 </TouchableOpacity>
 
-                <Text style={styles.title}>Add Vaccination</Text>
+                <Text style={styles.title}>Edit Vaccination</Text>
 
-                {/* Thick line below header */}
                 <View style={styles.separatorLine} />
+
                 <View style={styles.inputContainer}>
                     <Text style={[styles.floatingLabel, vaccinationFor ? styles.labelFocused : {}]}>
                         Vaccine Name *
@@ -101,9 +100,9 @@ console.log('fff', fileName);
                         <Picker.Item label="Hepatitis B" value="hepatitis_b" />
                     </Picker>
                 </View>
-                {renderInputField('vaccinationfor', 'Vaccination For', vaccinationFor, setVaccinationFor)}
-                {/* Taken On Field */}
+
                 {renderInputField('takenOn', 'Taken On *', takenOn, setTakenOn)}
+
                 <View style={styles.inputContainer}>
                     <Text style={[styles.floatingLabel, vaccineDetail ? styles.labelFocused : {}]}>
                         Vaccine Details *
@@ -119,10 +118,8 @@ console.log('fff', fileName);
                     </Picker>
                 </View>
 
-                {/* Lot Number Field */}
                 {renderInputField('lotNumber', 'Lot Number', lotNumber, setLotNumber)}
 
-                {/* Next Vaccination Date Field */}
                 <View style={styles.inputContainer}>
                     <Text style={[styles.floatingLabel, isFocused.nextVaccinationDate || nextVaccinationDate ? styles.labelFocused : {}]}>
                         Next Vaccination Date
@@ -137,7 +134,6 @@ console.log('fff', fileName);
                     </TouchableOpacity>
                 </View>
 
-                {/* Date Picker Modal */}
                 <DateTimePickerModal
                     isVisible={showDatePicker}
                     mode="date"
@@ -146,10 +142,8 @@ console.log('fff', fileName);
                     date={nextVaccinationDate}
                 />
 
-                {/* Notes Field */}
                 {renderInputField('notes', 'Notes', notes, setNotes)}
 
-                {/* File Upload */}
                 <Text style={styles.label}>Report File</Text>
                 <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
                     <TouchableOpacity style={styles.fileUpload} onPress={handleFileUpload}>
@@ -157,9 +151,7 @@ console.log('fff', fileName);
                     </TouchableOpacity>
                     <Ionicons name="cloud-upload-outline" size={32} color="black" onPress={handleFileUpload}/>
                 </View>
-                <Text style={styles.fileDetails}>Max file size 5 MB. Supported formats: txt, doc, pdf, jpeg, ppt, xls, DICOM image files</Text>
 
-                {/* Save Button */}
                 <TouchableOpacity style={styles.button} onPress={handleSave} disabled={loading}>
                     <Text style={styles.buttonText}>Save</Text>
                 </TouchableOpacity>
@@ -170,11 +162,6 @@ console.log('fff', fileName);
                         </View>
                     </BlurView>
                 )}
-                {/* {showSuccessMessage && (
-                    <View style={styles.successMessageContainer}>
-                        <Text style={styles.successMessage}>Vaccination added successfully!</Text>
-                    </View>
-                )} */}
             </View>
         </ScrollView>
     );

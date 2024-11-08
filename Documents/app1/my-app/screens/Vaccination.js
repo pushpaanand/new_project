@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, Image, FlatList, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 
 const vaccinationData = [
@@ -9,29 +9,28 @@ const vaccinationData = [
     vaccineName: 'Covishield',
     takenOn: '01-Oct-2024',
     nextVaccinationDate: '30-Nov-2024',
+    lotNumber: '7',
   },
   {
     vaccineName: 'Covaxin',
     takenOn: '10-Sep-2024',
     nextVaccinationDate: '10-Nov-2024',
+    lotNumber: '15'
   },
-  // Add more entries as needed
 ];
 
 export default function Vaccination() {
-  const route = useRoute(); 
-    const [message, setMessage] = useState(route.params?.message? route.params?.message:'');
+  const route = useRoute();
+  const [message, setMessage] = useState(route.params?.message ? route.params?.message : '');
 
-    useEffect(() => {
-      // Check if there is a message passed
-      if (route.params?.message) {
-          setMessage(route.params.message);
-          // Clear the message after a certain time (optional)
-          const timer = setTimeout(() => {
-              setMessage(''); // Clear the message after 2 seconds
-          }, 2000);
-          return () => clearTimeout(timer); // Clear timeout on unmount
-      }
+  useEffect(() => {
+    if (route.params?.message) {
+      setMessage(route.params.message);
+      const timer = setTimeout(() => {
+        setMessage('');
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
   }, [route.params?.message]);
 
   const navigation = useNavigation();
@@ -45,43 +44,47 @@ export default function Vaccination() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons name="arrow-back" size={24} color="#6b1f58" onPress={handleBackPress}/>
+        <Ionicons name="arrow-back" size={24} color="#6b1f58" onPress={handleBackPress} />
         <Text style={styles.headerText}>Vaccination</Text>
-        <Ionicons name="add-circle-outline" size={30} color="#6b1f58" onPress={() => navigation.navigate('addvaccination')}/>
+        <Ionicons name="add-circle-outline" size={30} color="#6b1f58" onPress={() => navigation.navigate('addvaccination')} />
       </View>
       <View style={styles.separatorLine} />
-      
+
       <Image source={require('../assets/vaccinate.png')} style={styles.image} />
 
       {vaccinationData ? (
-      <ScrollView style={styles.tableContainer}>
-      <View style={styles.table}>
-        <View style={styles.tableHeader}>
-          <Text style={styles.tableHeaderText}>Vaccination</Text>
-          <Text style={styles.tableHeaderText}>Taken On</Text>
-          <Text style={styles.tableHeaderText}>Next Vaccination Date</Text>
-        </View>
+        <ScrollView style={styles.tableContainer}>
+          <View style={styles.table}>
+            <View style={styles.tableHeader}>
+              <Text style={styles.tableHeaderText}>Vaccination</Text>
+              <Text style={styles.tableHeaderText}>Taken On</Text>
+              <Text style={styles.tableHeaderText}>Next Vaccination Date</Text>
+            </View>
 
-        {vaccinationData.map((item, index) => (
-          <View key={index} style={[styles.tableRow, index % 2 === 1 && styles.alternateRow]}>
-            <Text style={styles.tableRowText}>{item.vaccineName}</Text>
-            <Text style={styles.tableRowText}>{item.takenOn}</Text>
-            <Text style={styles.tableRowText}>{item.nextVaccinationDate}</Text>
+            {vaccinationData.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={[styles.tableRow, index % 2 === 1 && styles.alternateRow]}
+                onPress={() => navigation.navigate('updatevaccine', { item })}
+              >
+                <Text style={styles.tableRowText}>{item.vaccineName}</Text>
+                <Text style={styles.tableRowText}>{item.takenOn}</Text>
+                <Text style={styles.tableRowText}>{item.nextVaccinationDate}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
-        ))}
-      </View>
-    </ScrollView>
+        </ScrollView>
       ) : (
         <View style={styles.otpContainer}>
-      <Text style={styles.title}>No data available</Text>
-      </View>
+          <Text style={styles.title}>No data available</Text>
+        </View>
       )}
-        
-        {message ? (
-                <View style={styles.successMessageContainer}>
-                    <Text style={styles.successMessage}>{message}</Text>
-                </View>
-            ) : null}
+
+      {message ? (
+        <View style={styles.successMessageContainer}>
+          <Text style={styles.successMessage}>{message}</Text>
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -114,10 +117,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginVertical: 20,
-    color: '#692367', 
+    color: '#692367',
   },
   separatorLine: {
-    height: 5, 
+    height: 5,
     backgroundColor: '#692367',
     width: '100%',
     marginBottom: 20,
@@ -142,52 +145,52 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     alignItems: 'center',
-},
-successMessage: {   
+  },
+  successMessage: {
     color: '#692367',
     fontSize: 16,
-},
-// table: {
-//   borderWidth: 0,
-//   borderColor: '#692367',
-//   borderRadius: 18,
-//   borderWidth: 1,
-// },
-tableContainer: {
-  margin: 10,
-  
-  overflow: 'hidden',
-  backgroundColor: 'white',
-  elevation: 3,
-  marginTop: 15,
-  borderRadius: 18,
-},
-tableHeader: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  backgroundColor: '#6b1f58',
-  padding: 10,
-  borderRadius: 18,
-},
-tableHeaderText: {
-  fontSize: 14,
-  fontWeight: 'bold',
-  color: 'white',
-  flex: 1,
-  textAlign: 'center',
-},
-tableRow: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  padding: 10,
-},
-alternateRow: {
-  backgroundColor: '#f3e5f5',
-},
-tableRowText: {
-  fontSize: 14,
-  color: '#333',
-  flex: 1,
-  textAlign: 'center',
-},
+  },
+  // table: {
+  //   borderWidth: 0,
+  //   borderColor: '#692367',
+  //   borderRadius: 18,
+  //   borderWidth: 1,
+  // },
+  tableContainer: {
+    margin: 10,
+
+    overflow: 'hidden',
+    backgroundColor: 'white',
+    elevation: 3,
+    marginTop: 15,
+    borderRadius: 18,
+  },
+  tableHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#6b1f58',
+    padding: 10,
+    borderRadius: 18,
+  },
+  tableHeaderText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
+    flex: 1,
+    textAlign: 'center',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  alternateRow: {
+    backgroundColor: '#f3e5f5',
+  },
+  tableRowText: {
+    fontSize: 14,
+    color: '#333',
+    flex: 1,
+    textAlign: 'center',
+  },
 });

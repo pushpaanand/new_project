@@ -33,6 +33,8 @@ import DoctorAvailability from '../screens/DoctorAvailability';
 import Profile from '../screens/Profile';
 import ViewConsultation from '../screens/ViewConsultation';
 import Review from '../screens/Review';
+import SecurityLock from '../screens/SecurityLock';
+import UpdateVaccination from '../Add/UpdateVaccination';
 
 // Create Tab Navigator and Stack Navigator
 const Tab = createBottomTabNavigator();
@@ -42,6 +44,7 @@ const Stack = createNativeStackNavigator();
 function MainTabNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="security" component={SecurityLock} options={{headerShown: false}} />
       <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Stack.Screen name="Otp" component={Otp} options={{ headerShown: false }} />
@@ -69,6 +72,7 @@ function MainTabNavigator() {
       <Stack.Screen name="profile" component={Profile} options={{headerShown: false}} />
       <Stack.Screen name="viewconsult" component={ViewConsultation} options={{headerShown: false}} />
       <Stack.Screen name="review" component={Review} options={{headerShown: false}} />
+      <Stack.Screen name="updatevaccine" component={UpdateVaccination} options={{headerShown: false}} />      
     </Stack.Navigator>
   );
 }

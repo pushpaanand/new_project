@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/ip_emr/static/css/main.e6c13ad2.css",
-    "main.js": "/ip_emr/static/js/main.61ae1f99.js",
-    "static/js/453.f48d62a9.chunk.js": "/ip_emr/static/js/453.f48d62a9.chunk.js",
-    "static/media/logo.gif": "/ip_emr/static/media/logo.23fa34647e89b9791c27.gif",
-    "static/media/chyawa@2x.png": "/ip_emr/static/media/chyawa@2x.ceb635c734775b77b7c2.png",
-    "static/media/hospitalVisit@4x.png": "/ip_emr/static/media/hospitalVisit@4x.6a07960336cdf2b56174.png",
-    "static/media/KauveryNewLogo.png": "/ip_emr/static/media/KauveryNewLogo.5a2e093e96c4393d82e5.png",
-    "static/media/IntroSliderLogo.png": "/ip_emr/static/media/IntroSliderLogo.aa28fc1c8a14dfb00d81.png",
-    "static/media/qr.png": "/ip_emr/static/media/qr.746a7c1d6cfc7d8450ee.png",
-    "static/media/event_calander.png": "/ip_emr/static/media/event_calander.fc1d8c42a4c8b8ee1d0d.png",
-    "static/media/Logo_original.png": "/ip_emr/static/media/Logo_original.337798a15f1f78bc77c3.png",
-    "static/media/IntroSliderImage3@1x.png": "/ip_emr/static/media/IntroSliderImage3@1x.8356fc6cf57aa2b52ab1.png",
-    "static/media/search_not_found@2x.png": "/ip_emr/static/media/search_not_found@2x.5774b024aa85e602cc07.png",
-    "static/media/IntroSliderImage2@1x.png": "/ip_emr/static/media/IntroSliderImage2@1x.0c388ec5febd9a2730e3.png",
-    "static/media/KauveryLogo@1x.png": "/ip_emr/static/media/KauveryLogo@1x.40e754c97cd5de8d4e7e.png",
-    "static/media/HQLogo.png": "/ip_emr/static/media/HQLogo.f5613629aae388994aae.png",
-    "static/media/Logo_Hq@1x.png": "/ip_emr/static/media/Logo_Hq@1x.15f183e4a44c50b670be.png",
-    "static/media/familyMember@4x.png": "/ip_emr/static/media/familyMember@4x.e195412142a994eb0926.png",
-    "index.html": "/ip_emr/index.html",
-    "main.e6c13ad2.css.map": "/ip_emr/static/css/main.e6c13ad2.css.map",
-    "main.61ae1f99.js.map": "/ip_emr/static/js/main.61ae1f99.js.map",
-    "453.f48d62a9.chunk.js.map": "/ip_emr/static/js/453.f48d62a9.chunk.js.map"
+    "main.css": "/new_project/static/css/main.e6c13ad2.css",
+    "main.js": "/new_project/static/js/main.3d296ea2.js",
+    "static/js/453.f48d62a9.chunk.js": "/new_project/static/js/453.f48d62a9.chunk.js",
+    "static/media/logo.gif": "/new_project/static/media/logo.23fa34647e89b9791c27.gif",
+    "static/media/chyawa@2x.png": "/new_project/static/media/chyawa@2x.ceb635c734775b77b7c2.png",
+    "static/media/hospitalVisit@4x.png": "/new_project/static/media/hospitalVisit@4x.6a07960336cdf2b56174.png",
+    "static/media/KauveryNewLogo.png": "/new_project/static/media/KauveryNewLogo.5a2e093e96c4393d82e5.png",
+    "static/media/IntroSliderLogo.png": "/new_project/static/media/IntroSliderLogo.aa28fc1c8a14dfb00d81.png",
+    "static/media/qr.png": "/new_project/static/media/qr.746a7c1d6cfc7d8450ee.png",
+    "static/media/event_calander.png": "/new_project/static/media/event_calander.fc1d8c42a4c8b8ee1d0d.png",
+    "static/media/Logo_original.png": "/new_project/static/media/Logo_original.337798a15f1f78bc77c3.png",
+    "static/media/IntroSliderImage3@1x.png": "/new_project/static/media/IntroSliderImage3@1x.8356fc6cf57aa2b52ab1.png",
+    "static/media/search_not_found@2x.png": "/new_project/static/media/search_not_found@2x.5774b024aa85e602cc07.png",
+    "static/media/IntroSliderImage2@1x.png": "/new_project/static/media/IntroSliderImage2@1x.0c388ec5febd9a2730e3.png",
+    "static/media/KauveryLogo@1x.png": "/new_project/static/media/KauveryLogo@1x.40e754c97cd5de8d4e7e.png",
+    "static/media/HQLogo.png": "/new_project/static/media/HQLogo.f5613629aae388994aae.png",
+    "static/media/Logo_Hq@1x.png": "/new_project/static/media/Logo_Hq@1x.15f183e4a44c50b670be.png",
+    "static/media/familyMember@4x.png": "/new_project/static/media/familyMember@4x.e195412142a994eb0926.png",
+    "index.html": "/new_project/index.html",
+    "main.e6c13ad2.css.map": "/new_project/static/css/main.e6c13ad2.css.map",
+    "main.3d296ea2.js.map": "/new_project/static/js/main.3d296ea2.js.map",
+    "453.f48d62a9.chunk.js.map": "/new_project/static/js/453.f48d62a9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.61ae1f99.js"
+    "static/js/main.3d296ea2.js"
   ]
 }
